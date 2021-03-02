@@ -1,0 +1,114 @@
+Metadata-Version: 2.1
+Name: libzim
+Version: 1.0.0.dev0
+Summary: A python-facing API for creating and interacting with ZIM files
+Home-page: https://github.com/openzim/python-libzim
+Author: Monadical Inc.
+Author-email: jdc@monadical.com
+License: GPL-3.0-or-later
+Project-URL: Source, https://github.com/openzim/python-libzim
+Project-URL: Bug Tracker, https://github.com/openzim/python-libzim/issues
+Project-URL: Changelog, https://github.com/openzim/python-libzim/releases
+Project-URL: Documentation, https://github.com/openzim/python-libzim/blob/master/README.md
+Project-URL: Donate, https://www.kiwix.org/en/support-us/
+Description: # python-libzim
+        
+        The Python-libzim package allows you to read/write [ZIM
+        files](https://openzim.org) in Python. It provides a shallow Python
+        interface on top of the [`libzim`](https://github.com/openzim/libzim)
+        C++ library.
+        
+        It is primarily used in openZIM scrapers like for example
+        [`Sotoki`](https://github.com/openzim/sotoki) or
+        [`Youtube2zim`](https://github.com/openzim/youtube).
+        
+        Read [CONTRIBUTING.md](./CONTRIBUTING.md) to know more about
+        Python-libzim development.
+        
+        [![Build Status](https://github.com/openzim/python-libzim/workflows/test/badge.svg?query=branch%3Amaster)](https://github.com/openzim/python-libzim/actions?query=branch%3Amaster)
+        [![CodeFactor](https://www.codefactor.io/repository/github/openzim/python-libzim/badge)](https://www.codefactor.io/repository/github/openzim/python-libzim)
+        [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+        [![PyPI version shields.io](https://img.shields.io/pypi/v/libzim.svg)](https://pypi.org/project/libzim/)
+        [![codecov](https://codecov.io/gh/openzim/python-libzim/branch/master/graph/badge.svg)](https://codecov.io/gh/openzim/python-libzim)
+        
+        ## Installation
+        
+        The [PyPI package](https://pypi.org/project/libzim/) is bundled with a
+        recent version of the libzim for macOS and GNU/Linux (x86_64
+        architecture). For other OSes, the latest libzim has to be
+        compiled manually, See [Setup hints](#setup-hints) to know more.
+        
+        ```bash
+        pip3 install libzim
+        ```
+        
+        ## Quickstart
+        
+        ### Read a ZIM
+        
+        ```python
+        from libzim.reader import Archive
+        
+        zim = Archive("test.zim")
+        print(f"Main entry is at {zim.main_entry.get_item().path}")
+        entry = zim.get_entry_by_path("path/to/my-article")
+        print(f"Entry {entry.title} at {entry.path} is {entry.get_item().size}b:")
+        print(bytes(entry.get_item().content).decode("UTF-8"))
+        ```
+        
+        ### Write a ZIM
+        
+        See [example](examples/basic_writer.py) for a basic usage of the
+        writer API.
+        
+        ## Setup hints
+        
+        ### Installing the `libzim` dylib and headers manually
+        
+        If you have to install the libzim manually, you will have to [compile
+        `libzim` from
+        source](https://github.com/openzim/libzim). This binding has been designed
+        to work with the latest version of the libzim, we only recommend to
+        use it with latest released version.
+        
+        If you have not installed libzim in standard directory, you will have
+        to set `LD_LIBRARY_PATH` to allow python to find the library. Assuming
+        you have extracted (or installed) the library if LIBZIM_DIR:
+        
+        ```bash
+        export LD_LIBRARY_PATH="${LIBZIM_DIR}/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH"
+        ```
+        
+        ## License
+        
+        [GPLv3](https://www.gnu.org/licenses/gpl-3.0) or later, see
+        [LICENSE](LICENSE) for more details.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Topic :: Utilities
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Classifier: Topic :: System :: Archiving
+Classifier: Topic :: System :: Archiving :: Compression
+Classifier: Topic :: System :: Archiving :: Mirroring
+Classifier: Topic :: System :: Archiving :: Backup
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Indexing/Search
+Classifier: Topic :: Sociology :: History
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: System Administrators
+Classifier: Programming Language :: Cython
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
