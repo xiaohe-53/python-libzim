@@ -8,7 +8,7 @@ __pycache__
 .tox
 .coverage
 coverage.*
-
+.idea
 # Compiled binaries and package builds
 # Dylibs and headers
 

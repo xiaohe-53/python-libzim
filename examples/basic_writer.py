@@ -86,3 +86,9 @@ entry = zim.get_entry_by_path("Monadical")
 print(f"Main entry is at {zim.main_entry.get_item().path}")
 print(f"Entry {entry.title} at {entry.path} is {entry.get_item().size}b:")
 print(bytes(entry.get_item().content).decode("UTF-8"))
+print("iterator!!!")
+for i in range(0, zim.entry_count):
+    entry = zim._get_entry_by_id(i)
+    if not entry.is_redirect:
+        strI = bytes(entry.get_item().content).decode('UTF-8')
+        print("itemI:`%s`" % strI)
