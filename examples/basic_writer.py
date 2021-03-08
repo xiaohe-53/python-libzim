@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 # This file is part of python-libzim
 # (see https://github.com/libzim/python-libzim)
 #
@@ -80,15 +82,24 @@ with Creator(zim_file_path).config_indexing(True, "eng").config_minclustersize(
         zc.add_metadata(name.title(), value.encode("UTF-8"))
 
 
+import sys
+print(sys.getdefaultencoding())
+
 print("Testing reader")
 zim = Archive(zim_file_path)
 entry = zim.get_entry_by_path("Monadical")
 print(f"Main entry is at {zim.main_entry.get_item().path}")
 print(f"Entry {entry.title} at {entry.path} is {entry.get_item().size}b:")
-print(bytes(entry.get_item().content).decode("UTF-8"))
+# print(bytes(entry.get_item().content).decode("UTF-8"))
 print("iterator!!!")
+import chardet
 for i in range(0, zim.entry_count):
     entry = zim._get_entry_by_id(i)
     if not entry.is_redirect:
-        strI = bytes(entry.get_item().content).decode('UTF-8')
-        print("itemI:`%s`" % strI)
+        strI = bytes(entry.get_item().content).decode('utf-8')
+        # strI = str(bytes(entry.get_item().content),
+        #            encoding='unicode-escape')
+        charI=chardet.detect(bytes(entry.get_item().content))
+        print(charI)
+        # print("itemI:`%s`" % strI)
+        print(strI)
